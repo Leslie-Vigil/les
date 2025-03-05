@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta y Respuesta</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #f50057;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p id="question1">1. ¿Me quieres?</p>
+        <button onclick="nextQuestion(1)">Sí</button>
+        <button onclick="nextQuestion(0)">No</button>
+
+        <p id="question2" style="display:none;">2. ¿Me das un beso?</p>
+        <button id="kissButton" style="display:none;" onclick="showMessage(true)">Sí</button>
+        <button id="noKissButton" style="display:none;" onclick="showMessage(false)">No</button>
+
+        <div class="message" id="message" style="display:none;"></div>
+    </div>
+
+    <script>
+        function nextQuestion(answer) {
+            if (answer === 1) {
+                // Escondemos la primera pregunta y los botones
+                document.getElementById('question1').style.display = 'none';
+                document.querySelectorAll('button')[0].style.display = 'none';
+                document.querySelectorAll('button')[1].style.display = 'none';
+                
+                // Mostramos la segunda pregunta y los botones de respuestas
+                document.getElementById('question2').style.display = 'block';
+                document.getElementById('kissButton').style.display = 'inline-block';
+                document.getElementById('noKissButton').style.display = 'inline-block';
+            }
+        }
+
+        function showMessage(giveKiss) {
+            let message = document.getElementById('message');
+            if (giveKiss) {
+                message.innerText = "¡Bésame mucho!";
+            } else {
+                message.innerText = "¡Qué mal!";
+            }
+            message.style.display = 'block';
+            // Escondemos las opciones de la segunda pregunta
+            document.getElementById('kissButton').style.display = 'none';
+            document.getElementById('noKissButton').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
